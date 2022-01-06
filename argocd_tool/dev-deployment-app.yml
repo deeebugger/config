@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: git@github.com:deeebugger/configs.git
+    repoURL: git@github.com:deeebugger/config.git
     targetRevision: main
     path: environments/DEV/
     directory:
