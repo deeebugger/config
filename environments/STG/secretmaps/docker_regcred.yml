@@ -1,0 +1,11 @@
+apiVersion: v1
+data:
+  .dockerconfigjson: ewogICAgICAgICJhdXRocyI6IHsKICAgICAgICAgICAgICAgICJodHRwczovL2luZGV4LmRvY2tlci5pby92MS8iOiB7CiAgICAgICAgICAgICAgICAgICAgICAgICJhdXRoIjogImFYTm9ZWEpoYmpwcVpXNXJhVzV6UURFeU13PT0iCiAgICAgICAgICAgICAgICB9CiAgICAgICAgfQp9Cg==
+kind: Secret
+metadata:
+  creationTimestamp: "2022-01-05T09:54:42Z"
+  name: regcred
+  namespace: stg-ns
+  resourceVersion: "146661"
+  uid: 7107585d-a234-4f6a-8acd-a7015787e011
+type: kubernetes.io/dockerconfigjson

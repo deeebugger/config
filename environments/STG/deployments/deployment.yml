@@ -1,0 +1,33 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: stg-app
+  name: stg-app
+  namespace: stg-ns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stg-app
+  template:
+    metadata:
+      labels:
+        app: stg-app
+    spec:
+      containers:
+        - name: stg-app
+          image: isharan/sample-web:202201060838
+          ports:
+          - containerPort: 80
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "500Mi"
+              cpu: "200m" 
+      restartPolicy: Always
+      imagePullSecrets:
+      - name: regcred

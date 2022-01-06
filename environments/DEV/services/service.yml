@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: dev-app
+    role: ingress
+  name: dev-app-service
+  namespace: dev-ns
+spec:
+  ports:
+  - name: "80"
+    port: 80
+    targetPort: 80  
+  selector:
+    app: dev-app

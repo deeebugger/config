@@ -1,0 +1,33 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: prod-app
+  name: prod-app
+  namespace: prod-ns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prod-app
+  template:
+    metadata:
+      labels:
+        app: prod-app
+    spec:
+      containers:
+        - name: prod-app
+          image: isharan/sample-web:TagVersion
+          ports:
+          - containerPort: 80
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "500Mi"
+              cpu: "200m" 
+      restartPolicy: Always
+      imagePullSecrets:
+      - name: regcred
