@@ -58,7 +58,7 @@ pipeline {
           timestamps {
             git branch: 'main',
                 credentialsId: 'Jenkins_kube',
-                url: 'git@github.com:deeebugger/configs.git',
+                url: 'git@github.com:deeebugger/config.git',
                 poll: false
             sh "ls -lat"
                 }
