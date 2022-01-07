@@ -19,10 +19,11 @@ pipeline {
     stage('Checkout Config Repo') {
         steps {
           timestamps {
-            git branch: 'main',
-                credentialsId: 'Jenkins_kube',
-                url: 'git@github.com:deeebugger/config.git',
-                poll: false
+            //git branch: 'main',
+             //   credentialsId: 'Jenkins_kube',
+               // url: 'git@github.com:deeebugger/config.git',
+               // poll: false
+            checkout([$class: 'GitSCM', branches: [[name: 'main']], extensions: [], userRemoteConfigs: [[url: 'git@github.com:deeebugger/config.git']]])   
             sh "ls -lat"
                 }
             }
@@ -44,6 +45,9 @@ pipeline {
         timestamps {
           echo 'Git push'
           sh """
+           # git fetch 
+           # git remote set-url origin git@github.com:deeebugger/config.git
+            git branch
             git add *
             git commit -m "Image version upgraded to ${BULD_VERSION}"
             git push origin main
@@ -51,10 +55,10 @@ pipeline {
         }
       }
     }
-     stage ('Promote_to_Staging') {
-            steps {
-                build job: 'STG_Deploy'
-            }
-        }
+  //   stage ('Promote_to_Staging') {
+   //         steps {
+   //             build job: 'STG_Deploy'
+    //        }
+   //     }
   }
 }
