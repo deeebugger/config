@@ -19,9 +19,10 @@ pipeline {
         stage('Checkout Code Repo') {
         steps {
           timestamps {
-            git branch: 'main',
-                credentialsId: 'Jenkins_kube',
-                url: 'git@github.com:deeebugger/webapp.git'
+              checkout([$class: 'GitSCM', branches: [[name: 'main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/deeebugger/webapp.git']]])
+            //git branch: 'main',
+                //credentialsId: 'Jenkins_kube',
+                //url: 'git@github.com:deeebugger/webapp.git'
             sh "ls -lat"
                 }
             }
@@ -33,12 +34,12 @@ pipeline {
           sh """
           echo "I'll uncomment below 2 lines once my jenkins is ready with docker"
           docker build -t sample-webapp .
-          cp ~/config.json /var/lib/jenkins/.docker/config.json
+          cp ~/config.json /var/jenkins_home/.docker/config.json
           docker login
           docker tag sample-webapp:latest ${DOCKER_USER}/sample-web:${BULD_VERSION}
           echo ${BULD_VERSION} > ~/version.txt
           echo "I'll add awss3 push command later once jenkins is ready with ec2role"
-          cat version.txt
+          cat ~/version.txt
           """
         }
       }
@@ -56,10 +57,11 @@ pipeline {
     stage('Checkout Config Repo') {
         steps {
           timestamps {
-            git branch: 'main',
-                credentialsId: 'Jenkins_kube',
-                url: 'git@github.com:deeebugger/config.git',
-                poll: false
+            //git branch: 'main',
+                //credentialsId: 'Jenkins_kube',
+                //url: 'git@github.com:deeebugger/config.git',
+                checkout([$class: 'GitSCM', branches: [[name: 'main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/deeebugger/config.git']]])
+                //poll: false
             sh "ls -lat"
                 }
             }
