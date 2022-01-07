@@ -29,5 +29,5 @@ spec:
               memory: "500Mi"
               cpu: "200m" 
       restartPolicy: Always
-      //imagePullSecrets:
-      //- name: regcred
+      #imagePullSecrets:
+      #- name: regcred
